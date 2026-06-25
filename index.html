@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>李佳静的个人主页</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei",serif;}
+
+html {
+    scroll-behavior: smooth; /* 全局平滑滚动 */
+}
+body{
+    width:1920px;
+    min-height:100vh;
+    overflow-x:auto;
+    overflow-y:auto;
+    background:#fff;
+}
+.wrap{width:1920px;display:flex;flex-direction:column;}
+
+/* 顶部导航 */
+.nav-tabs{
+    width:1920px;
+    height:76px;
+    background:#d1dce3;
+    display:flex;
+    flex-shrink:0;
+    position:sticky;
+    top:0;
+    z-index:999;
+}
+.tab-item{
+    flex:1;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    color:#333;
+    cursor:pointer;
+    transition: background 0.3s;
+}
+.tab-item.active{background:#c6d4dd;}
+.tab-item:hover{background:#bfcdd6;}
+
+.content-box{display:flex;flex-direction:column;}
+.split-line{width:1920px;height:22px;background:#93c7b1;flex-shrink:0;}
+
+/* 统一图片样式 */
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 通用按钮hover */
+.enter-btn, .submit-btn {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.enter-btn:hover, .submit-btn:hover {
+    background: #93c7b1;
+    color: #fff;
+}
+.next-text {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.next-text:hover {
+    color: #007b40;
+}
+
+/* 雪花飘动动画 */
+@keyframes snowMove {
+    0% {transform: translateY(0) rotate(0deg);}
+    50% {transform: translateY(10px) rotate(10deg);}
+    100% {transform: translateY(0) rotate(0deg);}
+}
+.snow1, .snow2 {
+    animation: snowMove 3s ease-in-out infinite;
+}
+
+/* ========== 区块1：首页banner ========== */
+#banner{
+    width:1920px;
+    padding:30px 0;
+    background:#93c7b1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+.banner-bg{
+    width:1840px;
+    height:360px;
+    background:#b7e2f7;
+    border-radius:10px;
+    position:relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+.snow1{
+    position:absolute;top:30px;left:10px;width:110px;height:140px;background:#fff;
+    clip-path: polygon(50% 0%, 60% 36%, 97% 36%, 66% 58%, 78% 90%, 50% 72%, 22% 90%, 34% 58%, 3% 36%, 40% 36%);
+}
+.snow2{
+    position:absolute;top:15px;left:580px;width:95px;height:115px;background:#fff;
+    clip-path: polygon(50% 0%, 60% 36%, 97% 36%, 66% 58%, 78% 90%, 50% 72%, 22% 90%, 34% 58%, 3% 36%, 40% 36%);
+}
+.enter-btn{
+    position:absolute;bottom:50px;left:870px;background:#fff;padding:8px 28px;border-radius:6px;font-size:26px;
+    border: none;
+}
+
+/* ========== 区块2：个人信息 ========== */
+#info{
+    width:1920px;
+    padding:50px 60px;
+    background:#e5f9dd;
+    display:flex;
+    gap:60px;
+    align-items:flex-start;
+    position:relative;
+}
+.avatar-card{
+    width:280px;
+    height:340px;
+    border-radius:10px;
+    flex-shrink:0;
+    overflow: hidden;
+}
+.info-text{flex:1;}
+.info-h1{font-size:48px;text-align:center;margin-bottom:30px;}
+.info-row{font-size:30px;line-height:2.2;}
+.info-desc{
+    margin-top:16px;
+    padding:18px 22px;
+    background:#d7e3d1;
+    border-radius:8px;
+    font-size:28px;
+    line-height:1.7;
+}
+.head-round{
+    width:100px;height:100px;
+    border-radius:50%;
+    position:absolute;
+    right:80px;
+    top:60px;
+    overflow: hidden;
+}
+.next-text{position:absolute;right:60px;bottom:40px;font-size:28px;}
+
+/* ========== 区块3：我的学校 ========== */
+#school{
+    width:1920px;
+    padding:40px 60px;
+    background:#e5f9dd;
+    position:relative;
+}
+.school-h2{font-size:42px;text-align:center;margin-bottom:30px;}
+.school-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap:20px;
+    margin-bottom:30px;
+}
+.school-img{
+    height:220px;
+    border-radius:8px;
+    overflow: hidden;
+}
+.school-desc{
+    padding:0 100px;
+    font-size:28px;
+    line-height:1.8;
+}
+.left-head{
+    width:80px;height:80px;
+    border-radius:50%;
+    position:absolute;
+    left:20px;
+    top:120px;
+    overflow: hidden;
+}
+.run-xiaoxin{
+    width:120px;
+    height:160px;
+    position:absolute;
+    right:40px;
+    bottom:40px;
+    overflow: hidden;
+}
+
+/* ========== 区块4：美食页 ========== */
+#food{
+    width:1920px;
+    padding:40px 60px;
+    background:#b6e1f8;
+    position:relative;
+}
+.food-wrap{
+    position:relative;
+    width:100%;
+    height:420px;
+}
+.food-circle{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    position:absolute;
+    overflow: hidden;
+}
+.f1{top:20px;left:120px;}
+.f2{top:20px;left:850px;}
+.f3{top:20px;right:120px;}
+.f4{top:230px;left:120px;}
+.f5{top:230px;right:120px;}
+.food-title{
+    position:absolute;
+    top:180px;
+    left:820px;
+    font-size:80px;
+    font-weight:bold;
+    color:#222;
+}
+.dog-cartoon{
+    position:absolute;
+    width:320px;
+    height:240px;
+    top:120px;
+    left:420px;
+    border-radius:10px;
+    overflow: hidden;
+}
+
+/* ========== 区块5：我的家乡焦作 ========== */
+#jiaozuo{
+    width:1920px;
+    padding:40px 60px;
+    background:#e5f9dd;
+    position:relative;
+}
+.jz-top{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    margin-bottom:26px;
+}
+.jz-round{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    flex-shrink:0;
+    overflow: hidden;
+}
+.jz-h2{font-size:52px;font-weight:bold;}
+.jz-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    gap:16px;
+    margin-bottom:30px;
+}
+.jz-img{
+    height:220px;
+    border-radius:8px;
+    overflow: hidden;
+}
+.jz-text{
+    margin:0 80px;
+    padding:22px 26px;
+    background:#d7e3d1;
+    border-radius:10px;
+    font-size:28px;
+    line-height:1.75;
+}
+
+/* ========== 区块6：留言板 ========== */
+#board{
+    width:1920px;
+    padding:40px 60px 60px;
+    background:#e5f9dd;
+    position:relative;
+}
+.board-h1{font-size:52px;text-align:center;margin-bottom:40px;}
+.form-box{
+    width:800px;
+    display:flex;
+    flex-direction:column;
+    gap:26px;
+}
+.form-line{
+    display:flex;
+    align-items:center;
+    font-size:32px;
+    gap:20px;
+}
+.form-label{width:120px;flex-shrink:0;}
+.form-input{
+    flex:1;
+    height:50px;
+    background:#cccccc;
+    border-radius:6px;
+    border:none;
+    padding:0 12px;
+    font-size:24px;
+}
+.form-textarea{
+    width:680px;
+    height:130px;
+    background:#cccccc;
+    border-radius:6px;
+    border:none;
+    padding:10px 12px;
+    font-size:24px;
+    resize:none;
+}
+.submit-btn{
+    width:120px;
+    height:50px;
+    font-size:28px;
+    margin-left:140px;
+    border:none;
+    border-radius:6px;
+    background:#fff;
+}
+.lie-xiaoxin{
+    width:260px;
+    height:280px;
+    position:absolute;
+    right:100px;
+    bottom:60px;
+    border-radius:10px;
+    overflow: hidden;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <!-- 导航标签 -->
+    <div class="nav-tabs">
+        <div class="tab-item active" data-target="#banner">首页</div>
+        <div class="tab-item" data-target="#info">基本信息</div>
+        <div class="tab-item" data-target="#school">我的学校</div>
+        <div class="tab-item" data-target="#food">喜欢美食</div>
+        <div class="tab-item" data-target="#jiaozuo">我的家乡</div>
+        <div class="tab-item" data-target="#board">留言板</div>
+    </div>
+
+    <div class="content-box">
+        <!-- 1 首页banner -->
+        <div id="banner">
+            <div class="banner-bg">
+                <!-- 图片一：首页大图 -->
+                <img src="img/banner.jpg" alt="首页横幅图">
+            </div>
+            <div class="snow1"></div>
+            <div class="snow2"></div>
+            <button class="enter-btn" data-next="#info">进入</button>
+        </div>
+        <div class="split-line"></div>
+
+        <!-- 2 个人信息 -->
+        <div id="info">
+            <div class="avatar-card">
+                <!-- 图片二 -->
+                <img src="img/avatar.jpg" alt="个人照片">
+            </div>
+            <div class="info-text">
+                <h2 class="info-h1">个人信息</h2>
+                <div class="info-row">姓名：李佳静</div>
+                <div class="info-row">学校：郑州信息科技职业学院</div>
+                <div class="info-row">星座：摩羯座</div>
+                <div class="info-row">家乡：河南焦作</div>
+                <div class="info-row">兴趣爱好：听歌，玩游戏，小说，追剧</div>
+                <div class="info-row">个性签名：雨的哲学是泪的形而上学</div>
+                <div class="info-desc">简介：我是一个性格开朗的女生，善于与人沟通在校期间积极参与各种社团与兼职活动。</div>
+            </div>
+            <div class="head-round">
+                <!-- 图片三 -->
+                <img src="img/head1.jpg" alt="头像小图">
+            </div>
+            <div class="next-text" data-next="#school">下一页</div>
+        </div>
+        <div class="split-line"></div>
+
+        <!-- 3 我的学校 -->
+        <div id="school">
+            <div class="left-head">
+                <!-- 图片四 -->
+                <img src="img/school_head.jpg" alt="校园头像">
+            </div>
+            <h2 class="school-h2">郑州信息科技职业学院</h2>
+            <div class="school-grid">
+                <div class="school-img">
+                    <!-- 图片五 -->
+                    <img src="img/sch1.jpg" alt="校园风景1">
+                </div>
+                <div class="school-img">
+                    <!-- 图片六 -->
+                    <img src="img/sch2.jpg" alt="校园风景2">
+                </div>
+                <div class="school-img">
+                    <!-- 图片七 -->
+                    <img src="img/sch3.jpg" alt="校园风景3">
+                </div>
+                <div class="school-img">
+                    <!-- 图片八 -->
+                    <img src="img/sch4.jpg" alt="校园风景4">
+                </div>
+            </div>
+            <div class="school-desc">
+                郑州信息科技职业学院是位于郑州市郑东新区龙子湖高校园区的一所公办全日制高职院校，2002年由河南省政府批准成立、2003年在教育部备案，实行河南省政府主管、河南开放大学代管的管理体制。
+            </div>
+            <div class="run-xiaoxin">
+                <!-- 图片九 -->
+                <img src="img/cartoon1.jpg" alt="卡通人物">
+            </div>
+            <div class="next-text" style="right:40px;bottom:30px;" data-next="#food">下一页</div>
+        </div>
+        <div class="split-line"></div>
+
+        <!-- 4 美食页面 -->
+        <div id="food">
+            <div class="food-wrap">
+                <div class="food-circle f1">
+                    <!-- 图片十 -->
+                    <img src="img/food1.jpg" alt="美食1">
+                </div>
+                <div class="food-circle f2">
+                    <!-- 图片十一 -->
+                    <img src="img/food2.jpg" alt="美食2">
+                </div>
+                <div class="food-circle f3">
+                    <!-- 图片十二 -->
+                    <img src="img/food3.jpg" alt="美食3">
+                </div>
+                <div class="food-circle f4">
+                    <!-- 图片十三 -->
+                    <img src="img/food4.jpg" alt="美食4">
+                </div>
+                <div class="food-circle f5">
+                    <!-- 图片十四 -->
+                    <img src="img/food5.jpg" alt="美食5">
+                </div>
+                <div class="dog-cartoon">
+                    <!-- 图片十五 -->
+                    <img src="img/dog.jpg" alt="小狗卡通">
+                </div>
+                <h1 class="food-title">美食</h1>
+            </div>
+            <div class="next-text" style="right:40px;bottom:30px;" data-next="#jiaozuo">下一页</div>
+        </div>
+        <div class="split-line"></div>
+
+        <!-- 5 我的家乡焦作 -->
+        <div id="jiaozuo">
+            <div class="jz-top">
+                <div class="jz-round">
+                    <!-- 图片十六 -->
+                    <img src="img/jz_head.jpg" alt="焦作图标">
+                </div>
+                <h2 class="jz-h2">焦作</h2>
+            </div>
+            <div class="jz-grid">
+                <div class="jz-img">
+                    <!-- 图片十七 -->
+                    <img src="img/jz1.jpg" alt="焦作风景1">
+                </div>
+                <div class="jz-img">
+                    <!-- 图片十八 -->
+                    <img src="img/jz2.jpg" alt="焦作风景2">
+                </div>
+                <div class="jz-img">
+                    <!-- 图片十九 -->
+                    <img src="img/jz3.jpg" alt="焦作风景3">
+                </div>
+                <div class="jz-img">
+                    <!-- 图片二十 -->
+                    <img src="img/jz4.jpg" alt="焦作风景4">
+                </div>
+            </div>
+            <div class="jz-text">
+                地势：河南以平原为主，而焦作地处太行山南麓，多丘陵和山地，地貌更接近山西。<br>
+                焦作是一个重要的物资集散地，经济以煤炭、机械制造和农业为主。主要粮食作物有小麦、玉米和水稻，经济作物包括花生、棉花和大豆等
+            </div>
+            <div class="next-text" style="right:40px;bottom:30px;" data-next="#board">下一页</div>
+        </div>
+        <div class="split-line"></div>
+
+        <!-- 6 留言板 -->
+        <div id="board">
+            <h1 class="board-h1">留言板</h1>
+            <div class="form-box">
+                <div class="form-line">
+                    <span class="form-label">姓名：</span>
+                    <input class="form-input" type="text" placeholder="请输入姓名">
+                </div>
+                <div class="form-line">
+                    <span class="form-label">电子邮箱：</span>
+                    <input class="form-input" type="email" placeholder="请输入邮箱">
+                </div>
+                <div class="form-line">
+                    <span class="form-label">匿名：</span>
+                    <input class="form-input" type="text" placeholder="是/否">
+                </div>
+                <div class="form-line">
+                    <span class="form-label">留言：</span>
+                    <textarea class="form-textarea" placeholder="写下你的留言..."></textarea>
+                </div>
+                <button class="submit-btn">提交</button>
+            </div>
+            <div class="lie-xiaoxin">
+                <!-- 图片二十一 -->
+                <img src="img/xiaoxin.jpg" alt="小新卡通">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// 导航栏点击跳转
+const tabs = document.querySelectorAll('.tab-item');
+tabs.forEach(item => {
+    item.addEventListener('click', () => {
+        const targetId = item.getAttribute('data-target');
+        document.querySelector(targetId).scrollIntoView();
+    })
+})
+
+// 下一页/进入按钮跳转
+const nextBtns = document.querySelectorAll('[data-next]');
+nextBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-next');
+        document.querySelector(targetId).scrollIntoView();
+    })
+})
+
+// 提交按钮简单弹窗提示
+const submitBtn = document.querySelector('.submit-btn');
+submitBtn.addEventListener('click', () => {
+    alert('留言提交成功！');
+})
+</script>
+</body>
+</html>
